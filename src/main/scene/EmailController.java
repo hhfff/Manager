@@ -453,12 +453,21 @@ public class EmailController implements Initializable{
         firstDateOfCurrentWeek.set(Calendar.HOUR_OF_DAY,0);
         firstDateOfCurrentWeek.set(Calendar.MINUTE, 0);
         firstDateOfCurrentWeek.set(Calendar.SECOND, 0);
+        Calendar todayInCalendar=Calendar.getInstance().getInstance();
+        todayInCalendar.set(Calendar.HOUR_OF_DAY,0);
+        todayInCalendar.set(Calendar.MINUTE, 0);
+        todayInCalendar.set(Calendar.SECOND, 0);
+        Calendar yesterInCalendar=Calendar.getInstance();
+        yesterInCalendar.setTime(todayInCalendar.getTime());
+        yesterInCalendar.add(Calendar.DATE,-1);
+        //System.out.println(todayInCalendar.getTime().toString()+" "+yesterInCalendar.getTime().toString());
+
 
 
         try {
             calendar.setTime(inboxMessages.get(startIndex).getSentDate());
 
-            System.out.println(calendar.getTime().toString());
+            //System.out.println(calendar.getTime().toString());
 
             /*calendar.set(Calendar.HOUR, 0);
 
@@ -485,16 +494,23 @@ public class EmailController implements Initializable{
                 for (int i = startIndex; i >= 0; i--) {
 
                     if (inboxMessages.get(i).getSentDate().before(calendar.getTime())) {
-                        System.out.println(i + "\t" + calendar.getTime().toString() + "\t" + inboxMessages.get(i).getSentDate().toString());
-                        ToggleButton button = new ToggleButton(daysName[calendar.get(Calendar.DAY_OF_WEEK) - 1]);
+                        Message message=inboxMessages.get(i);
+                        Message previousMessage=inboxMessages.get(i+1);
+                        //System.out.println(i + "\t" + calendar.getTime().toString() + "\t" + inboxMessages.get(i).getSentDate().toString());
+                        String dayText=daysName[calendar.get(Calendar.DAY_OF_WEEK) - 1];
+                        if(previousMessage.getSentDate().after(todayInCalendar.getTime())) dayText="Today";
+                        else if(previousMessage.getSentDate().before(todayInCalendar.getTime())&&previousMessage.getSentDate().after(yesterInCalendar.getTime())) {
+                            dayText = "Yesterday";
+                        }
+                        ToggleButton button = new ToggleButton(dayText);
                         addButtonToDateSelectBar(button, startIndex, i + 1);
 
-                        calendar.setTime(inboxMessages.get(i).getSentDate());
+                        calendar.setTime(message.getSentDate());
                         calendar.set(Calendar.HOUR_OF_DAY, 0);
                         calendar.set(Calendar.MINUTE, 0);
                         calendar.set(Calendar.SECOND, 0);
                         startIndex = i;
-                        if (inboxMessages.get(i).getSentDate().before(firstDateOfCurrentWeek.getTime())) {
+                        if (message.getSentDate().before(firstDateOfCurrentWeek.getTime())) {
                             break;
                         }
                     }
@@ -502,13 +518,11 @@ public class EmailController implements Initializable{
             }
 
             ToggleButton lastWeekButton=new ToggleButton("Last Week");
-            firstDateOfWeek.add(Calendar.DAY_OF_WEEK,-7);
-            firstDateOfWeek.set(Calendar.HOUR_OF_DAY,0);
-            firstDateOfWeek.set(Calendar.MINUTE, 0);
-            firstDateOfWeek.set(Calendar.SECOND, 0);
+            firstDateOfCurrentWeek.add(Calendar.DAY_OF_WEEK,-7);
+
            //System.out.println("first date of last week "+firstDateOfWeek.getTime().toString());
             for(int i=startIndex;i>=0;i--){
-                if(inboxMessages.get(i).getSentDate().before(firstDateOfWeek.getTime())) {
+                if(inboxMessages.get(i).getSentDate().before(firstDateOfCurrentWeek.getTime())) {
                     addButtonToDateSelectBar(lastWeekButton,startIndex,i+1);
                     startIndex=i;
                     break;
