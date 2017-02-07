@@ -107,6 +107,7 @@ public class NoteController implements Initializable{
 
 
     }
+
     protected void retrieveGroupFolder(){
         SqlRetrieveData r = new SqlRetrieveData();
         r.openConnection();

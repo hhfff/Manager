@@ -73,7 +73,7 @@ public class AddTaskController implements Initializable{
         dueTime.setTime(null);
         location.setText("");
         priority.getSelectionModel().clearSelection();*/
-        Stage stage=(Stage)cancel.getScene().getWindow();
+        Stage stage=(Stage)saveButton.getScene().getWindow();
         stage.close();;
     }
     public void setType(String type) {

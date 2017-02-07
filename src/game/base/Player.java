@@ -19,11 +19,12 @@ public class Player extends BaseObject {
     private long lastTime;
 
     private int acc=2;
-    private int verticalSpeed;
+    private double verticalSpeed;
     private final int MAX_SPEED=3;
     private int upSpeed=-16;
 
     private double gravity=9.8;
+
     private double framePerSec= Duration.seconds(0.017).toSeconds();
     private enum STATE{UP,CENTER,DOWN};
     private STATE currentState;
@@ -71,11 +72,19 @@ public class Player extends BaseObject {
 
     @Override
     public void update(long currentTime) {
+        /*long elapse=currentTime-lastTime;
+        lastTime=currentTime;
+        double deltaTimeInSec=elapse/1_000_000_000.0;// from milli to sec
+        verticalSpeed+=verticalSpeed+deltaTimeInSec*gravity;
+        moveY(getY()+verticalSpeed*deltaTimeInSec);*/
+
+
 
 
 
         //当前速度 = 初始速度 + 加速度 x dt
        // 当前位置 = 初始位置 + 速度 x dt
+
         //speed+=
         // height = 0.5*gravity*time*time+speed*time
         //double deltaTime=(currentTime-lastTime)/1_000_000_000.0;//for m

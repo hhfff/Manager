@@ -165,18 +165,17 @@ public class CreateAccountController implements Initializable {
                     school.getValue() + "");                               //school
             user.storeData();
 
-            try {
-                Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
-                Parent parent = FXMLLoader.load(getClass().getResource("Login.fxml"));
-                Scene scene = new Scene(parent);
-                stage.hide();
 
-                stage.setScene(scene);
+                Stage stage = (Stage) ((Node) event.getTarget()).getScene().getWindow();
+                stage.close();
+                //Parent parent = FXMLLoader.load(getClass().getResource("Login.fxml"));
+                //Scene scene = new Scene(parent);
+                //stage.hide();
+
+                //stage.setScene(scene);
                 //stage.sizeToScene();
-                stage.show();
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-            }
+                //stage.show();
+
         }
 
     }
