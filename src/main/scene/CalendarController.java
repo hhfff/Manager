@@ -132,8 +132,8 @@ public class CalendarController extends MainSceneController implements Initializ
     public void yearSelector() {
         clearGrid();
         selectedMode = "YearPicker";
-        modeDisplay.setText("2000 - 2042");
-        for (int i = 0, x = 0, y = 0, year = cal.getSelectedYear(); i < 49; i++) {
+        modeDisplay.setText(cal.getCurrentYear()-10 + "-" + (cal.getSelectedYear()+52) );
+        for (int i = 0, x = 0, y = 0, year = cal.getCurrentYear()-10; i < 49; i++) {
             if (y > 6) {
                 x++;
                 y = 0;
@@ -142,11 +142,12 @@ public class CalendarController extends MainSceneController implements Initializ
 
             int j = i;
 
-            yearButton[i].setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    System.out.println(yearButton[j].getText());
-                }
+            // Try out lambda
+            int tempYear = year;
+            yearButton[i].setOnAction(ActionEvent -> {
+                selectedMode = "MonthPicker";
+                cal.setSelectedYear(tempYear);
+                monthSelector();
             });
 
             y++;

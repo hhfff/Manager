@@ -64,7 +64,6 @@ public class CalendarPeriodController extends CalendarController implements Init
     }
 
     public void updateScreen() {
-        //eventTable.getItems().clear();
 
         taskTimeColumn.setCellValueFactory(new PropertyValueFactory("dueTime"));
 
@@ -111,6 +110,7 @@ public class CalendarPeriodController extends CalendarController implements Init
             stage.setOnHidden(WindowEvent -> {
                 System.out.println("Refreshed");
                 Platform.runLater(() -> {
+                    eventTable.getItems().clear();
                     getTimeSlots();
                     updateScreen();
                 });
