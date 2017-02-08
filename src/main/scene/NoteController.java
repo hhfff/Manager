@@ -153,7 +153,7 @@ public class NoteController implements Initializable{
         SqlRetrieveData retrieve = new SqlRetrieveData();
         retrieve.openConnection();
 
-        ResultSet rs = retrieve.retriveData("SELECT * FROM note WHERE groupName=\""+groupName+"\" AND adminNo='"+adminNo+"' ");
+        ResultSet rs = retrieve.retriveData("SELECT * FROM note WHERE groupName=\""+groupName+"\"");
         try {
             while(rs.next()){
                 if(rs.getInt("isPined")>0){
