@@ -450,7 +450,7 @@ public class EmailController implements Initializable{
 
 
         //get last email date in inboxlist,last item display first
-        Calendar calendar = Calendar.getInstance();
+        Calendar messageDateInCalendar = Calendar.getInstance();
         Calendar firstDateOfWeek=Calendar.getInstance();
        // Calendar firstDateOfCurrentWeek=Calendar.getInstance();
 
@@ -471,7 +471,7 @@ public class EmailController implements Initializable{
 
 
         try {
-            calendar.setTime(inboxMessages.get(startIndex).getSentDate());
+            messageDateInCalendar.setTime(inboxMessages.get(startIndex).getSentDate());
 
             //use tocalculate only this week
             //the calendar first day of week is sunday,if get this sunday must -7 to get last week sunday date and +1 for this week monday
@@ -486,20 +486,20 @@ public class EmailController implements Initializable{
 
             //System.out.println(calendar.getTime().toString()+"    "+firstDateOfCurrentWeek.getTime().toString());
 
-            if(calendar.getTime().after(firstDateOfWeek.getTime())) {
-                calendar.set(Calendar.HOUR_OF_DAY,0);
-                calendar.set(Calendar.MINUTE, 0);
-                calendar.set(Calendar.SECOND, 0);
+            if(messageDateInCalendar.getTime().after(firstDateOfWeek.getTime())) {
+                messageDateInCalendar.set(Calendar.HOUR_OF_DAY,0);
+                messageDateInCalendar.set(Calendar.MINUTE, 0);
+                messageDateInCalendar.set(Calendar.SECOND, 0);
                 for (int i = startIndex; i >= 0; i--) {
 
 
-                    if (inboxMessages.get(i).getSentDate().before(calendar.getTime())) {
+                    if (inboxMessages.get(i).getSentDate().before(messageDateInCalendar.getTime())) {
                         //set button text
                         Message message=inboxMessages.get(i);
                         Message previousMessage=inboxMessages.get(i+1);
 
 
-                        String dayText=daysName[calendar.get(Calendar.DAY_OF_WEEK) - 1];
+                        String dayText=daysName[messageDateInCalendar.get(Calendar.DAY_OF_WEEK) - 1];
                         if(previousMessage.getSentDate().after(todayInCalendar.getTime())) dayText="Today";
                         else if(previousMessage.getSentDate().before(todayInCalendar.getTime())&&previousMessage.getSentDate().after(yesterInCalendar.getTime())) {
                             dayText = "Yesterday";
@@ -509,10 +509,10 @@ public class EmailController implements Initializable{
                         addButtonToDateSelectBar(button, startIndex, i + 1);
 
                         //set calendar date to current message
-                        calendar.setTime(message.getSentDate());
-                        calendar.set(Calendar.HOUR_OF_DAY, 0);
-                        calendar.set(Calendar.MINUTE, 0);
-                        calendar.set(Calendar.SECOND, 0);
+                        messageDateInCalendar.setTime(message.getSentDate());
+                        messageDateInCalendar.set(Calendar.HOUR_OF_DAY, 0);
+                        messageDateInCalendar.set(Calendar.MINUTE, 0);
+                        messageDateInCalendar.set(Calendar.SECOND, 0);
                         startIndex = i;
                        // util.Util.prln(message.getSentDate().toString()+" "+firstDateOfWeek.getTime().toString());
                         if (message.getSentDate().before(firstDateOfWeek.getTime())) {
@@ -539,7 +539,9 @@ public class EmailController implements Initializable{
             addButtonToDateSelectBar(olderButton,startIndex,0);
 
             ToggleButton allButton=new ToggleButton("All");
+            //set to all button
             allButton.setSelected(true);
+            currentInboxButtonIndex=inboxMessages.size()-1;
             addButtonToDateSelectBar(allButton,inboxMessages.size()-1,0);
 
         } catch (MessagingException e) {
