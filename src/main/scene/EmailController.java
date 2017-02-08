@@ -228,8 +228,7 @@ public class EmailController implements Initializable{
         }
 
         retriveMail();
-        inboxButton.setSelected(true);
-        currentState= State.IMPORTANT;
+
 
     }
 
@@ -322,11 +321,14 @@ public class EmailController implements Initializable{
                 stage.showAndWait();
                 password = passField.getText();
                 adminNo = nameField.getText();
+                currentState=State.IMPORTANT;
+                importantButton.setSelected(true);
 
             }
             if(password.equals("")==false&&adminNo.equals("")==false) {
                 passSet=true;
                 RetriveEmail re = new RetriveEmail(adminNo, password);
+                util.Util.prln("retirve email");
                 re.openConnection();
                 try {
                     inboxMessages = FXCollections.observableArrayList(re.retriveEmail());//wrap it in observable arraylist
@@ -337,6 +339,8 @@ public class EmailController implements Initializable{
                     util.Util.prln(e.getMessage());
 
                 }
+                inboxButton.setSelected(true);
+                currentState= State.IMPORTANT;
             }
 
 
@@ -510,7 +514,7 @@ public class EmailController implements Initializable{
                         calendar.set(Calendar.MINUTE, 0);
                         calendar.set(Calendar.SECOND, 0);
                         startIndex = i;
-                        util.Util.prln(message.getSentDate().toString()+" "+firstDateOfWeek.getTime().toString());
+                       // util.Util.prln(message.getSentDate().toString()+" "+firstDateOfWeek.getTime().toString());
                         if (message.getSentDate().before(firstDateOfWeek.getTime())) {
                             break;
                         }

@@ -7,12 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/base/Player.java" afterPath="$PROJECT_DIR$/src/game/base/Player.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/game/screen/MainScreen.java" afterPath="$PROJECT_DIR$/src/game/screen/MainScreen.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scene/EmailController.java" afterPath="$PROJECT_DIR$/src/main/scene/EmailController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scene/MainSceneController.java" afterPath="$PROJECT_DIR$/src/main/scene/MainSceneController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scene/NoteController.java" afterPath="$PROJECT_DIR$/src/main/scene/NoteController.java" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -121,12 +116,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NoteController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="NoteController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scene/NoteController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="515">
+            <state relative-caret-position="-25">
               <caret line="155" column="97" lean-forward="false" selection-start-line="155" selection-start-column="97" selection-end-line="155" selection-end-column="97" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EmailController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/scene/EmailController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="177">
+              <caret line="550" column="41" lean-forward="true" selection-start-line="550" selection-start-column="41" selection-end-line="550" selection-end-column="41" />
+              <folding>
+                <element signature="e#12749#12773#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -232,11 +239,11 @@
         <option value="$PROJECT_DIR$/src/test/poro.java" />
         <option value="$PROJECT_DIR$/src/main/scene/CreateAccountController.java" />
         <option value="$PROJECT_DIR$/src/main/scene/AddTaskController.java" />
-        <option value="$PROJECT_DIR$/src/main/scene/EmailController.java" />
         <option value="$PROJECT_DIR$/src/game/screen/MainScreen.java" />
         <option value="$PROJECT_DIR$/src/main/scene/MainSceneController.java" />
         <option value="$PROJECT_DIR$/src/game/base/Player.java" />
         <option value="$PROJECT_DIR$/src/main/scene/NoteController.java" />
+        <option value="$PROJECT_DIR$/src/main/scene/EmailController.java" />
       </list>
     </option>
   </component>
@@ -789,7 +796,7 @@
     <option name="totallyTimeSpent" value="1302000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1048" extended-state="7" />
+    <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1210,16 +1217,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/scene/EmailController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="580">
-          <caret line="62" column="6" lean-forward="false" selection-start-line="62" selection-start-column="6" selection-end-line="62" selection-end-column="6" />
-          <folding>
-            <element signature="e#12586#12610#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/game/base/TopPipe.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="655">
@@ -1315,9 +1312,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scene/NoteController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="515">
+        <state relative-caret-position="-25">
           <caret line="155" column="97" lean-forward="false" selection-start-line="155" selection-start-column="97" selection-end-line="155" selection-end-column="97" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/scene/EmailController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="550" column="41" lean-forward="true" selection-start-line="550" selection-start-column="41" selection-end-line="550" selection-end-column="41" />
+          <folding>
+            <element signature="e#12749#12773#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
