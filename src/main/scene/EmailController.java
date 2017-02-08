@@ -60,9 +60,9 @@ public class EmailController implements Initializable{
     private final ToggleGroup toolBarGroup=new ToggleGroup();
 
     //today yesterday,2 more day last week(start end) older==last week enddate
-    private ArrayList<Date> dateForListRetrive=new ArrayList<Date>();
-    private ArrayList<Integer> dateStartIndex=new ArrayList<Integer>();
-    private int currButIndex;
+    //private ArrayList<Date> dateForListRetrive=new ArrayList<Date>();
+   // private ArrayList<Integer> dateStartIndex=new ArrayList<Integer>();
+   // private int currButIndex;
     private String password;
     private String adminNo;
     private boolean passSet=false;
@@ -448,15 +448,17 @@ public class EmailController implements Initializable{
         //get last email date in inboxlist,last item display first
         Calendar calendar = Calendar.getInstance();
         Calendar firstDateOfWeek=Calendar.getInstance();
-        Calendar firstDateOfCurrentWeek=Calendar.getInstance();
+       // Calendar firstDateOfCurrentWeek=Calendar.getInstance();
 
-        firstDateOfCurrentWeek.set(Calendar.HOUR_OF_DAY,0);
-        firstDateOfCurrentWeek.set(Calendar.MINUTE, 0);
-        firstDateOfCurrentWeek.set(Calendar.SECOND, 0);
-        Calendar todayInCalendar=Calendar.getInstance().getInstance();
+        //firstDateOfCurrentWeek.set(Calendar.HOUR_OF_DAY,0);
+        //firstDateOfCurrentWeek.set(Calendar.MINUTE, 0);
+        //firstDateOfCurrentWeek.set(Calendar.SECOND, 0);
+
+        Calendar todayInCalendar=Calendar.getInstance();
         todayInCalendar.set(Calendar.HOUR_OF_DAY,0);
         todayInCalendar.set(Calendar.MINUTE, 0);
         todayInCalendar.set(Calendar.SECOND, 0);
+
         Calendar yesterInCalendar=Calendar.getInstance();
         yesterInCalendar.setTime(todayInCalendar.getTime());
         yesterInCalendar.add(Calendar.DATE,-1);
@@ -467,25 +469,18 @@ public class EmailController implements Initializable{
         try {
             calendar.setTime(inboxMessages.get(startIndex).getSentDate());
 
-            //System.out.println(calendar.getTime().toString());
-
-            /*calendar.set(Calendar.HOUR, 0);
-
-            ;*/
-
             //use tocalculate only this week
             //the calendar first day of week is sunday,if get this sunday must -7 to get last week sunday date and +1 for this week monday
-            int dayOfweek=calendar.getFirstDayOfWeek();
-            if(dayOfweek==1){
-                dayOfweek+=1;
-                firstDateOfWeek.add(Calendar.DATE,-7);
-            }
-            firstDateOfWeek.set(Calendar.DAY_OF_WEEK,dayOfweek);
+            //int dayOfweek=calendar.getFirstDayOfWeek();
+
+            //set to monday 00:00:00
+            firstDateOfWeek.set(Calendar.DAY_OF_WEEK,2);
             firstDateOfWeek.set(Calendar.HOUR_OF_DAY,0);
             firstDateOfWeek.set(Calendar.MINUTE, 0);
             firstDateOfWeek.set(Calendar.SECOND, 0);
 
-            System.out.println(calendar.getTime().toString()+"     "+firstDateOfCurrentWeek.getTime().toString());
+
+            //System.out.println(calendar.getTime().toString()+"    "+firstDateOfCurrentWeek.getTime().toString());
 
             if(calendar.getTime().after(firstDateOfWeek.getTime())) {
                 calendar.set(Calendar.HOUR_OF_DAY,0);
@@ -493,36 +488,43 @@ public class EmailController implements Initializable{
                 calendar.set(Calendar.SECOND, 0);
                 for (int i = startIndex; i >= 0; i--) {
 
+
                     if (inboxMessages.get(i).getSentDate().before(calendar.getTime())) {
+                        //set button text
                         Message message=inboxMessages.get(i);
                         Message previousMessage=inboxMessages.get(i+1);
-                        //System.out.println(i + "\t" + calendar.getTime().toString() + "\t" + inboxMessages.get(i).getSentDate().toString());
+
+
                         String dayText=daysName[calendar.get(Calendar.DAY_OF_WEEK) - 1];
                         if(previousMessage.getSentDate().after(todayInCalendar.getTime())) dayText="Today";
                         else if(previousMessage.getSentDate().before(todayInCalendar.getTime())&&previousMessage.getSentDate().after(yesterInCalendar.getTime())) {
                             dayText = "Yesterday";
                         }
+
                         ToggleButton button = new ToggleButton(dayText);
                         addButtonToDateSelectBar(button, startIndex, i + 1);
 
+                        //set calendar date to current message
                         calendar.setTime(message.getSentDate());
                         calendar.set(Calendar.HOUR_OF_DAY, 0);
                         calendar.set(Calendar.MINUTE, 0);
                         calendar.set(Calendar.SECOND, 0);
                         startIndex = i;
-                        if (message.getSentDate().before(firstDateOfCurrentWeek.getTime())) {
+                        util.Util.prln(message.getSentDate().toString()+" "+firstDateOfWeek.getTime().toString());
+                        if (message.getSentDate().before(firstDateOfWeek.getTime())) {
                             break;
                         }
                     }
                 }
             }
 
-            ToggleButton lastWeekButton=new ToggleButton("Last Week");
-            firstDateOfCurrentWeek.add(Calendar.DAY_OF_WEEK,-7);
+
+            firstDateOfWeek.add(Calendar.DAY_OF_WEEK,-7);
 
            //System.out.println("first date of last week "+firstDateOfWeek.getTime().toString());
             for(int i=startIndex;i>=0;i--){
-                if(inboxMessages.get(i).getSentDate().before(firstDateOfCurrentWeek.getTime())) {
+                if(inboxMessages.get(i).getSentDate().before(firstDateOfWeek.getTime())) {
+                    ToggleButton lastWeekButton=new ToggleButton("Last Week");
                     addButtonToDateSelectBar(lastWeekButton,startIndex,i+1);
                     startIndex=i;
                     break;
@@ -552,6 +554,7 @@ public class EmailController implements Initializable{
             public void handle(ActionEvent event) {
 
                 displayListContent(inboxMessages,startIndex,endIndex);
+                //for contextmenu use
                 currentInboxButtonIndex=startIndex;
             }
         });

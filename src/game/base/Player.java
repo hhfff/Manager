@@ -25,7 +25,7 @@ public class Player extends BaseObject {
 
     private double gravity=9.8;
 
-    private double framePerSec= Duration.seconds(0.017).toSeconds();
+
     private enum STATE{UP,CENTER,DOWN};
     private STATE currentState;
 

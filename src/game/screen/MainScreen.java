@@ -118,12 +118,15 @@ public class MainScreen extends GameScreen{
                         group.getChildren().remove(btn);
                         score=0;
                         start();
+                        group.getChildren().remove(btn);
                     }
                 });
                 group.getChildren().add(btn);
 
 
             }
+
+            //check pipe move to end change location
             if(obj instanceof TopPipe){
                 TopPipe p=(TopPipe)obj;
                 if(p.getX()+p.getWidth()<player.getX()) {
@@ -165,8 +168,7 @@ public class MainScreen extends GameScreen{
 
     @Override
     protected void draw(GraphicsContext gc) {
-        gc.setStroke(Color.WHITE);
-        gc.setFont(new Font("ARIAL",30));
+
 
 
         gc.drawImage(backgroundImage,0,0, SystemConfiguration.getStageWidth(),SystemConfiguration.getStageHeight()-groundHeight);
@@ -178,6 +180,10 @@ public class MainScreen extends GameScreen{
             obj.draw(gc);
         }
         for(Ground g:groudList) g.draw(gc);
+
+        //set score font
+        gc.setStroke(Color.WHITE);
+        gc.setFont(new Font("ARIAL",30));
         gc.strokeText(""+score,SystemConfiguration.getStageWidth()/2,50);
 
 

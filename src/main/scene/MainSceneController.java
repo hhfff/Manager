@@ -135,7 +135,7 @@ public class MainSceneController implements Initializable{
         }
         //MainScreen ms=new MainScreen(500,600);
 
-
+        //music
         String path=new File("src/media/Flappy Bird Theme Song.mp3").getAbsolutePath();
         group.getChildren().add(ms);
         ms.setGroup(group);
@@ -143,7 +143,7 @@ public class MainSceneController implements Initializable{
         ms.initiation();
 
         Stage stage=new Stage();
-        scene.setFill(Color.BLACK);
+        //scene.setFill(Color.BLACK);
         stage.setResizable(false);
         stage.sizeToScene();
         stage.setScene(scene);
