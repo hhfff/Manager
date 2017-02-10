@@ -72,6 +72,7 @@ public class CalendarPeriodController extends CalendarController implements Init
         eventTable.setItems(tasksList);
     }
 
+    // addTask() method coded by hefei
     public void addTask() {
         Alert alert=new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Choose type");
@@ -101,12 +102,13 @@ public class CalendarPeriodController extends CalendarController implements Init
 
             // Send to AddTaskController
             controller.setType(type);
-            controller.setDueDate(cal.arrangeDate(cal.getSelectedYear(), (cal.getSelectedMonth()+1), cal.getSelectedDay()));
 
             // Set scene to stage
             Scene scene=new Scene(root);
             stage.setScene(scene);
 
+            //This part is added by woon kit from here
+            controller.setDueDate(cal.arrangeDate(cal.getSelectedYear(), (cal.getSelectedMonth()+1), cal.getSelectedDay()));
             stage.setOnHidden(WindowEvent -> {
                 System.out.println("Refreshed");
                 Platform.runLater(() -> {
@@ -115,6 +117,7 @@ public class CalendarPeriodController extends CalendarController implements Init
                     updateScreen();
                 });
             });
+            // until here
 
             // Show stage
             stage.show();
